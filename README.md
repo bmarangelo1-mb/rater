@@ -86,9 +86,9 @@ Excel export is implemented in [`src/lib/excel/exportRaterXlsx.ts`](src/lib/exce
 Eq cell formulas use absolute references to the divisor cells in the Column Settings block:
 
 - Behavioral Eq (per row, per rater):
-  - `=SUM(<RawCell>/$F$<BehavioralDivRow>)*<behavioralWeight>`
+  - `=SUM(<RawCell>/$F$<BehavioralDivRow>)*0.3` (template-style)
 - Competency Eq:
-  - `=SUM(<RawCell>/$F$<CompetencyDivRow>)*<competencyWeight>`
+  - `=SUM(<RawCell>/$F$<CompetencyDivRow>)*0.7` (template-style)
 - Behavioral TOTAL:
   - `=SUM(<all behavioral eq cells>)/<raters>`
 - Competency TOTAL:
@@ -96,7 +96,7 @@ Eq cell formulas use absolute references to the divisor cells in the Column Sett
 - GRAND TOTAL:
   - `=SUM(<competencyTotalCell>+<behavioralTotalCell>)`
 
-The **Over-all score** column is exported as the computed label string (not a formula).
+The **Over-all score** column is left blank in the exported Excel to match the provided templates.
 
 #### Column Settings placement
 

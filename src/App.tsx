@@ -26,7 +26,7 @@ function App() {
       <div className="mx-auto w-full max-w-[1600px] px-4 py-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <div className="text-sm text-white/70">Koting Rater</div>
+            <div className="text-sm text-white/70">Zor&apos;s Rater</div>
             <h1 className="text-2xl font-semibold tracking-tight">Excel-like rater sheet</h1>
           </div>
           <div className="flex flex-wrap gap-2">

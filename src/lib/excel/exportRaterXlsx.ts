@@ -42,7 +42,7 @@ export async function exportRaterXlsx(opts: { settings: Settings; rows: RatingRo
   const { settings, rows } = opts
 
   const wb = new ExcelJS.Workbook()
-  wb.creator = 'Koting Rater'
+  wb.creator = "Zor's Rater"
   wb.created = new Date()
   const ws = wb.addWorksheet('Sheet1', {
     views: [{ state: 'frozen', ySplit: 2 }],
@@ -278,6 +278,11 @@ export async function exportRaterXlsx(opts: { settings: Settings; rows: RatingRo
   }
 
   const buf = await wb.xlsx.writeBuffer()
-  downloadBlob('koting-rater.xlsx', new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }))
+  downloadBlob(
+    'zors-rater.xlsx',
+    new Blob([buf], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    }),
+  )
 }
 

@@ -1,4 +1,4 @@
-## Koting Rater (Excel-like)
+## Zor's Rater (Excel-like)
 
 Single-page rater sheet app that mimics the provided `rater6.xlsx` / `rater7.xlsx` workflow with:
 
@@ -25,7 +25,7 @@ npm run dev
 
 ### Data model
 
-Stored in LocalStorage under key `koting-rater.appState.v1`:
+Stored in LocalStorage under key `zors-rater.appState.v1` (will also read legacy `koting-rater.appState.v1`):
 
 - `settings`
   - `raters`
@@ -64,7 +64,7 @@ For each row, for each rater:
 
 ### Export CSV
 
-Exports the currently visible sheet values (raw + derived values) to `koting-rater.csv`.
+Exports the currently visible sheet values (raw + derived values) to `zors-rater.csv`.
 
 ### Export Excel (.xlsx) template matching
 

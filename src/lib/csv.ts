@@ -46,6 +46,6 @@ export function exportRaterCsv(opts: { settings: Settings; rows: RatingRow[] }) 
   }
 
   const csv = lines.join('\r\n')
-  downloadBlob('koting-rater.csv', new Blob([csv], { type: 'text/csv;charset=utf-8' }))
+  downloadBlob('zors-rater.csv', new Blob([csv], { type: 'text/csv;charset=utf-8' }))
 }
 

@@ -1,10 +1,11 @@
 import type { AppStateV1 } from '../types'
 
-const STORAGE_KEY = 'koting-rater.appState.v1'
+const STORAGE_KEY = 'zors-rater.appState.v1'
+const LEGACY_STORAGE_KEY = 'koting-rater.appState.v1'
 
 export function loadAppState(): AppStateV1 | null {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem(LEGACY_STORAGE_KEY)
     if (!raw) return null
     const parsed = JSON.parse(raw) as unknown
     if (!parsed || typeof parsed !== 'object') return null
@@ -27,6 +28,7 @@ export function saveAppState(state: AppStateV1) {
 export function clearAppState() {
   try {
     localStorage.removeItem(STORAGE_KEY)
+    localStorage.removeItem(LEGACY_STORAGE_KEY)
   } catch {
     // ignore
   }

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Settings2 } from 'lucide-react'
+import { ChevronDown, ChevronUp, Settings2 } from 'lucide-react'
 import type { HTMLAttributes, ReactNode } from 'react'
 import type { Settings } from '../types'
 
@@ -25,16 +25,58 @@ function NumberInput(props: {
   max?: number
   onChange: (value: number) => void
 }) {
+  const step = props.step ?? 1
+  const min = props.min
+  const max = props.max
+
+  function clamp(v: number) {
+    let out = v
+    if (typeof min === 'number') out = Math.max(min, out)
+    if (typeof max === 'number') out = Math.min(max, out)
+    return out
+  }
+
+  function nudge(delta: 1 | -1) {
+    const cur = Number.isFinite(props.value) ? props.value : 0
+    const next = clamp(cur + delta * step)
+    // Avoid float noise for decimal steps.
+    const normalized =
+      step < 1 ? Number(next.toFixed(String(step).split('.')[1]?.length ?? 2)) : next
+    props.onChange(normalized)
+  }
+
   return (
-    <input
-      className="rounded-md border border-white/10 bg-black/20 px-3 py-2 text-right text-sm text-white outline-none transition focus:ring-2 focus:ring-sky-400/40"
-      inputMode={props.inputMode ?? 'decimal'}
-      value={Number.isFinite(props.value) ? props.value : 0}
-      step={props.step}
-      min={props.min}
-      max={props.max}
-      onChange={(e) => props.onChange(Number(e.target.value))}
-    />
+    <div className="relative">
+      <input
+        className="w-full rounded-md border border-white/10 bg-black/20 px-3 py-2 pr-9 text-right text-sm text-white outline-none transition focus:ring-2 focus:ring-sky-400/40"
+        inputMode={props.inputMode ?? 'decimal'}
+        value={Number.isFinite(props.value) ? props.value : 0}
+        step={step}
+        min={min}
+        max={max}
+        onChange={(e) => props.onChange(Number(e.target.value))}
+      />
+      <div className="absolute inset-y-0 right-1 flex flex-col justify-center">
+        <button
+          type="button"
+          className="rounded-sm p-1 text-white/60 hover:bg-white/10 hover:text-white/90"
+          onClick={() => nudge(1)}
+          aria-label="Increment"
+          tabIndex={-1}
+        >
+          <ChevronUp className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          className="rounded-sm p-1 text-white/60 hover:bg-white/10 hover:text-white/90"
+          onClick={() => nudge(-1)}
+          aria-label="Decrement"
+          tabIndex={-1}
+        >
+          <ChevronDown className="h-4 w-4" />
+        </button>
+      </div>
+    </div>
   )
 }
 
